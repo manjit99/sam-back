@@ -85,4 +85,23 @@ module.exports = class bookApi {
       }
     }
   }
+  //update book
+  static async updateBook(req, res) {
+    const bookID = req.params.id;
+
+    var modifiedBook = req.body;
+    console.log(bookID);
+    console.log(modifiedBook);
+    //now upadate the book
+    try {
+      await book.findByIdAndUpdate(bookID, modifiedBook);
+      res.status(200).json({
+        message: "book upadated",
+      });
+    } catch (error) {
+      res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
 };
